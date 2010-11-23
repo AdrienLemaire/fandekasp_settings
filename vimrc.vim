@@ -4,6 +4,7 @@
 "
 "
 " -> Verify that vim has been compiled with +python
+"  Don't forget to rename this file into .vimrc
 "
 "
 " Required plugins and libraries:
