@@ -1,14 +1,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimrc example for Python developer
-" Maintainer : Adrien Lemaire <lemaire.adrien@gmail.com>
+" Author: Adrien Lemaire <lemaire.adrien@gmail.com>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " -> Verify that vim has been compiled with +python
-" -> Create a backup directory in ~/.vimrc for ~ files
+" -> Create a backup directory in ~/.vim/ for ~ files
 "
 "
 " Required plugins and libraries:
 "   indent => http://www.vim.org/scripts/script.php?script_id=974
+"   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
 "   taglist => http://vim.sourceforge.net/scripts/script.php?script_id=273
 "   pep8 => https://github.com/cburroughs/pep8.py
 "   pyflakes => http://www.vim.org/scripts/script.php?script_id=2441
@@ -41,7 +42,6 @@
 "   AutoComplPop => http://www.vim.org/scripts/script.php?script_id=1879
 "   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
 "   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
-"   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -63,6 +63,8 @@ set expandtab           " Convert tabs into spaces
 set tw=80               " 80 characters max per line
 set nu                  " Display the number of each line
 set showcmd             " Display incomplete commands
+set ttyfast             " Fast terminal connection
+set title               " Name of the file in the window tab's title
 "colorscheme Mahewincs
 
 if v:version >= 703
@@ -72,10 +74,10 @@ endif
 if &t_Co> 2 || has("gui_running")
     " When terminal has colors, active syntax coloration
     syntax on
-    " Coloration of last searched pattern
-    " Type 'nohl' to remove highlight
-    set hlsearch
-    set incsearch " highlight of matching string while searching a pattern.
+    set hlsearch " Highlight results
+    " TIP: Type 'nohl' to remove highlight
+    set incsearch " Highlight of the first matching string
+    set smartcase " Highlight first matching string using history
 endif
 
 
@@ -163,7 +165,7 @@ map <F6> :call CleanText()<CR>
 map <silent> <F4> "<Esc>:w!<cr>:!python %<cr>"
 
 
-" Python syntax test
+" Python syntax test from syntax/python.vim plugin
 let python_highlight_all = 1
 
 
