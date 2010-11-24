@@ -4,7 +4,6 @@
 "
 "
 " -> Verify that vim has been compiled with +python
-"  Don't forget to rename this file into .vimrc
 "
 "
 " Required plugins and libraries:
@@ -40,6 +39,7 @@
 "   AutoComplPop => http://www.vim.org/scripts/script.php?script_id=1879
 "   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
 "   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
+"   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
 
 
 set nocompatible        " Use vim defaults
