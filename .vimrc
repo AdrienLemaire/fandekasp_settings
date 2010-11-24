@@ -1,9 +1,10 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimrc example for Python developer
 " Maintainer : Adrien Lemaire <lemaire.adrien@gmail.com>
-"
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " -> Verify that vim has been compiled with +python
+" -> Create a backup directory in ~/.vimrc for ~ files
 "
 "
 " Required plugins and libraries:
@@ -19,18 +20,19 @@
 "          silent! make! %
 "
 "
-"
 " Maps :
 "   F1 =>
 "   F2 =>
 "   F3 =>
-"   F4 =>
+"   F4 => Execute python script
 "   F5 =>
 "   F6 => CleanText (+ Pep8 if python)
 "   F7 =>
 "   F8 => Tag List
 "   F9 =>
 "   F10 =>
+"   F11 => French spellchecking
+"   F12 => English spellchecking
 "
 "
 " Other plugins you could be interested by :
@@ -40,7 +42,8 @@
 "   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
 "   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
 "   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
-
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible        " Use vim defaults
 set termencoding=utf-8  " character encoding
@@ -59,6 +62,7 @@ set softtabstop=4       " Number of spaces per backspace
 set expandtab           " Convert tabs into spaces
 set tw=80               " 80 characters max per line
 set nu                  " Display the number of each line
+set showcmd             " Display incomplete commands
 "colorscheme Mahewincs
 
 if v:version >= 703
@@ -71,6 +75,7 @@ if &t_Co> 2 || has("gui_running")
     " Coloration of last searched pattern
     " Type 'nohl' to remove highlight
     set hlsearch
+    set incsearch " highlight of matching string while searching a pattern.
 endif
 
 
@@ -101,6 +106,11 @@ set lcs:tab:>-,trail:.
 " highlight trailing spaces
 highlight RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
+
+
+" directory for ~ files
+set backupdir=$HOME/.vim/backup
+set directory=.,./.backup,/tmp
 
 
 " ------- Cleaning stuff ---------
@@ -149,10 +159,16 @@ map <F6> :call CleanText()<CR>
 " ------- end Cleaning stuff ---------
 
 
+" Execute the python script from vim
+map <silent> <F4> "<Esc>:w!<cr>:!python %<cr>"
 
 
 " Python syntax test
 let python_highlight_all = 1
+
+
+" Ignore some files with tab autocompletion
+set suffixes=*~,*.pyc,*.pyo
 
 
 " Red background to highlight searched patterns
@@ -169,15 +185,17 @@ if version >= 700
     au InsertLeave * hi StatusLine term=bold ctermfg=Black ctermbg=2 gui=bold
 endif
 
-" List of classes and methods in the opened files
+" List classes and methods in the opened files
 map <F8> :TlistToggle<cr>
+let Tlist_GainFocus_On_ToggleOpen=0
+let Tlist_Exit_OnlyWindow=1
 
 
 " Disable quickfix for pyflakes
 let g:pyflakes_use_quickfix = 0
 
 
-" Deactivate keyboard keys / Very geeky
+" Deactivate keyboard arrows
 noremap  <Up> ""
 noremap! <Up> <Esc>
 noremap  <Down> ""
@@ -186,3 +204,12 @@ noremap  <Left> ""
 noremap! <Left> <Esc>
 noremap  <Right> ""
 noremap! <Right> <Esc>
+
+
+set wildmenu " Enable menu at the bottom of the vim window
+set wildmode=list:longest,full
+
+
+" spellchecking
+map <silent> <F11> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+map <silent> <F12> "<Esc>:silent setlocal spell! spelllang=en<CR>"
