@@ -11,6 +11,8 @@
 "   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
 "   taglist => http://vim.sourceforge.net/scripts/script.php?script_id=273
 "   pep8 => https://github.com/cburroughs/pep8.py
+"   pydiction => http://www.vim.org/scripts/script.php?script_id=850
+"       Place the complete-dict and pydiction.py files into ~/.vim/dicts
 "   pyflakes => http://www.vim.org/scripts/script.php?script_id=2441
 "   nose => pip install nose
 "   vim-nosecompiler => https://github.com/olethanh/vim-nosecompiler
@@ -63,7 +65,7 @@ set nu                  " Display the number of each line
 set showcmd             " Display incomplete commands
 set ttyfast             " Fast terminal connection
 set title               " Name of the file in the window tab's title
-set t_Co=256            " 256 colors if remote shell
+set noerrorbells        " Shut the bell
 "colorscheme Mahewincs
 
 if v:version >= 703
@@ -94,6 +96,8 @@ if has("autocmd")
     "autocmd FileType python compiler pylint
     autocmd BufNewFile,BufRead *.py compiler nose
     set omnifunc=pythoncomplete#Complete " Python autocompletion !
+    let g:pydiction_location = "~/.vim/dicts/"
+    let g:pydiction_menu_height = 20
 else
     set autoindent " always set autoindenting on
 endif
@@ -112,11 +116,10 @@ match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
 
 set backup " Keep a backup file
-" directory for ~ files
 if !filewritable($HOME."/.vim/backup")
-    call mkdir($HOME."/.vim/backup", "p")
+    call mkdir($HOME."/.vim/backup", "p") " Creation of the backup dir
 endif
-set backupdir=$HOME/.vim/backup
+set backupdir=$HOME/.vim/backup " directory for ~ files
 set directory=.,./.backup,/tmp
 
 
