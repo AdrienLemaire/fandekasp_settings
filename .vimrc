@@ -4,7 +4,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " -> Verify that vim has been compiled with +python
-" -> Create a backup directory in ~/.vim/ for ~ files
 "
 "
 " Required plugins and libraries:
@@ -51,7 +50,6 @@ set enc=utf-8
 set fenc=utf-8
 set bs=2                " Authorize all deletion
 set ai                  " Always auto-indent
-set backup              " Keep a backup file
 set viminfo='20,\"50    " Read/write a .viminfo file, 50 lines max
 set history=200         " Save the last 200 commands in history
 set undolevels=100      " Save the last 200 undos in history
@@ -65,6 +63,7 @@ set nu                  " Display the number of each line
 set showcmd             " Display incomplete commands
 set ttyfast             " Fast terminal connection
 set title               " Name of the file in the window tab's title
+set t_Co=256            " 256 colors if remote shell
 "colorscheme Mahewincs
 
 if v:version >= 703
@@ -99,7 +98,9 @@ else
     set autoindent " always set autoindenting on
 endif
 
-set mouse=a " mouse enabled in vim
+if has("mouse")
+    set mouse=a " mouse enabled in vim
+endif
 
 " Show hidden characters like tab or endl
 set list
@@ -110,7 +111,11 @@ highlight RedundantSpaces ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
 
+set backup " Keep a backup file
 " directory for ~ files
+if !filewritable($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup", "p")
+endif
 set backupdir=$HOME/.vim/backup
 set directory=.,./.backup,/tmp
 
