@@ -23,7 +23,7 @@
 "
 "
 " Maps :
-"   F1 =>
+"   F1 => help system
 "   F2 =>
 "   F3 =>
 "   F4 => Execute python script
@@ -68,9 +68,11 @@ set title               " Name of the file in the window tab's title
 set noerrorbells        " Shut the bell
 "colorscheme Mahewincs
 
+
 if v:version >= 703
     set colorcolumn=80      " Coloration of the 80th column
 endif
+
 
 if &t_Co> 2 || has("gui_running")
     " When terminal has colors, active syntax coloration
@@ -102,13 +104,16 @@ else
     set autoindent " always set autoindenting on
 endif
 
+
 if has("mouse")
     set mouse=a " mouse enabled in vim
 endif
 
+
 " Show hidden characters like tab or endl
 set list
 set lcs:tab:>-,trail:.
+
 
 " highlight trailing spaces
 highlight RedundantSpaces ctermbg=red guibg=red
@@ -152,6 +157,7 @@ function <SID>Pep8()
   redraw!
 endfunction
 
+
 fun CleanText()
     " Remove trailing spaces
     let curcol = col(".")
@@ -159,18 +165,29 @@ fun CleanText()
     exe ":retab"
     exe ":%s/ \\+$//e"
     call cursor(curline, curcol)
-    if &filetype == 'python'
-        " if the current file is in python, we launch pep8
-        call <SID>Pep8()
-    endif
+    "if &filetype == 'python'
+        "" if the current file is in python, we launch pep8
+        "call <SID>Pep8()
+    "endif
 endfun
 
 map <F6> :call CleanText()<CR>
 " ------- end Cleaning stuff ---------
 
 
+fun ExecPython()
+    " Try to execute the script in python 2.6, else python 3.1
+    try
+        pyf @%
+    catch
+        silent !python3.1 %
+        " PS: if you launch a graphical interface such as a pygame script, your
+        " vim window may be all black. In this case, redraw the vim window with
+        " ^L
+    endtry
+endfun
 " Execute the python script from vim
-map <silent> <F4> "<Esc>:w!<cr>:!python %<cr>"
+map <silent> <F4> :call ExecPython()<CR>
 
 
 " Python syntax test from syntax/python.vim plugin
@@ -186,14 +203,23 @@ hi Search  term=reverse ctermbg=Red ctermfg=White guibg=Red guifg=White
 
 
 " better statusline
-set statusline=%F%m%r%h%w\|\ %<%{&ff}%-15.y\ [ascii:\%03.3b/hexa:\%02.2B]\ %=%0.((%l,%v%))%5.p%%/%L
+set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
+set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]\ %=%0.((%l,%v%))%5.p%%/%L
 set laststatus=2
 if version >= 700
+    " Filename
+    highlight User1 cterm=bold ctermfg=4 ctermbg=Black
+    highlight User2 term=bold,underline cterm=bold,underline gui=bold,underline
+    " Search
+    highlight Search term=standout ctermfg=4 ctermbg=7
+    " SplitLine
+    highlight VertSplit ctermbg=red ctermfg=Black guibg=red
+    au VimEnter * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
     " statusline color change when in insert mode
-    au VimEnter * hi StatusLine term=bold ctermfg=Black ctermbg=2 gui=bold
-    au InsertEnter * hi StatusLine term=underline ctermbg=5 gui=underline
-    au InsertLeave * hi StatusLine term=bold ctermfg=Black ctermbg=2 gui=bold
+    au InsertEnter * hi StatusLine term=underline ctermbg=3 gui=underline
+    au InsertLeave * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
 endif
+
 
 " List classes and methods in the opened files
 map <F8> :TlistToggle<cr>
