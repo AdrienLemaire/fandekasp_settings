@@ -166,6 +166,14 @@ fun CleanText()
     let curline = line(".")
     exe ":retab"
     exe ":%s/ \\+$//e"
+    " Replace {%var%} and {{var}} by {% var %} and {{ var }} in the templates
+    " silent will hide the press-Enter
+    " ge will hide the Not Found errors raised
+    silent :%s/[^ ]\zs\ze[%}]}/ /ge
+    silent :%s/{[%{]\zs\ze[^ ]/ /ge
+    "exe ':%s/[^ ]\zs\ze[%}]}/ /g'
+    "exe ':%s/{[%{]\zs\ze[^ ]/ /g'
+    set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
         " if the current file is in python, we launch pep8
