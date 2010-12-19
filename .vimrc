@@ -20,6 +20,7 @@
 "       To fix a bug (when you run the tests with \t, it opens a nose file),
 "       edit makegreen.vim line 26 and add a ! to the make command like so :
 "          silent! make! %
+"   doctest => http://www.vim.org/scripts/script.php?script_id=1867
 "
 "
 " Maps :
@@ -97,6 +98,7 @@ if has("autocmd")
     filetype plugin indent on
     "autocmd FileType python compiler pylint
     autocmd BufNewFile,BufRead *.py compiler nose
+    au BufRead,BufNewFile *.txt set filetype=doctest " coloration with doctest.vim
     set omnifunc=pythoncomplete#Complete " Python autocompletion !
     let g:pydiction_location = "~/.vim/dicts/"
     let g:pydiction_menu_height = 20
@@ -165,10 +167,10 @@ fun CleanText()
     exe ":retab"
     exe ":%s/ \\+$//e"
     call cursor(curline, curcol)
-    "if &filetype == 'python'
-        "" if the current file is in python, we launch pep8
-        "call <SID>Pep8()
-    "endif
+    if &filetype == 'python'
+        " if the current file is in python, we launch pep8
+        call <SID>Pep8()
+    endif
 endfun
 
 map <F6> :call CleanText()<CR>
