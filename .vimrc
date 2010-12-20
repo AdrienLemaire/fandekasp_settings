@@ -34,8 +34,8 @@
 "   F8 => Tag List
 "   F9 =>
 "   F10 =>
-"   F11 => French spellchecking
-"   F12 => English spellchecking
+"   F11 =>
+"   F12 =>
 "
 "
 " Other plugins you could be interested by :
@@ -44,6 +44,7 @@
 "   AutoComplPop => http://www.vim.org/scripts/script.php?script_id=1879
 "   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
 "   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
+"   python_match => http://www.vim.org/scripts/script.php?script_id=386
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -67,11 +68,44 @@ set showcmd             " Display incomplete commands
 set ttyfast             " Fast terminal connection
 set title               " Name of the file in the window tab's title
 set noerrorbells        " Shut the bell
+set spell               " Enable spellchecking
+set spelllang=en,fr     " spellchecking english and french
+set spellsuggest=10     " 10 alternative spelling maximum
 "colorscheme Mahewincs
+
+
+" Tooltips
+function! FoldSpellBalloon()
+    let foldStart = foldclosed(v:beval_lnum )
+    let foldEnd  = foldclosedend(v:beval_lnum)
+    let lines = [] " Detect if we are in a fold
+    if foldStart < 0
+        " Detect if we are on a misspelled word
+        let lines = spellsuggest( spellbadword(v:beval_text)[ 0 ], 5, 0 )
+    else
+        " we are in a fold
+        let numLines = foldEnd - foldStart + 1
+        " if we have too many lines in fold, show only the first 14
+        " and the last 14 lines
+        if ( numLines > 31 )
+            let lines = getline( foldStart, foldStart + 14 )
+            let lines += [ '-- Snipped ' . ( numLines - 30 ) . ' lines --' ]
+            let lines += getline( foldEnd - 14, foldEnd )
+        else "less than 30 lines, lets show all of them
+            let lines = getline( foldStart, foldEnd )
+        endif
+    endif
+    " return result
+    return join( lines, has( "balloon_multiline" ) ? "\n" : " " )
+endfunction
+set balloonexpr=FoldSpellBalloon()
+set ballooneval
 
 
 if v:version >= 703
     set colorcolumn=80      " Coloration of the 80th column
+    set cursorcolumn
+    set cursorline
 endif
 
 
@@ -118,8 +152,8 @@ set lcs:tab:>-,trail:.
 
 
 " highlight trailing spaces
-highlight RedundantSpaces ctermbg=red guibg=red
-match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
+"highlight RedundantSpaces ctermbg=red guibg=red  USELESS
+"match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
 
 set backup " Keep a backup file
@@ -166,12 +200,12 @@ fun CleanText()
     let curline = line(".")
     exe ":retab"
     exe ":%s/ \\+$//e"
-    " Replace {%var%} and {{var}} by {% var %} and {{ var }} in the templates
+    " Replace {% var %} and {{ var }} by {% var %} and {{ var }} in the templates
     " silent will hide the press-Enter
     " ge will hide the Not Found errors raised
-    silent :%s/[^ ]\zs\ze[%}]}/ /ge
+    silent :%s/[^ ]\zs\ze[ %}]}/ /ge
     silent :%s/{[%{]\zs\ze[^ ]/ /ge
-    "exe ':%s/[^ ]\zs\ze[%}]}/ /g'
+    "exe ':%s/[^ ]\zs\ze[ %}]}/ /g'
     "exe ':%s/{[%{]\zs\ze[^ ]/ /g'
     set nolazyredraw
     call cursor(curline, curcol)
@@ -228,6 +262,9 @@ if version >= 700
     " statusline color change when in insert mode
     au InsertEnter * hi StatusLine term=underline ctermbg=3 gui=underline
     au InsertLeave * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
+    " Cursor
+    highlight CursorLine ctermbg=LightYellow cterm=bold
+    highlight CursorColumn ctermbg=LightYellow cterm=bold
 endif
 
 
@@ -254,8 +291,3 @@ noremap! <Right> <Esc>
 
 set wildmenu " Enable menu at the bottom of the vim window
 set wildmode=list:longest,full
-
-
-" spellchecking
-map <silent> <F11> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
-map <silent> <F12> "<Esc>:silent setlocal spell! spelllang=en<CR>"
