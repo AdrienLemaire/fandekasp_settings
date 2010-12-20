@@ -24,7 +24,7 @@
 "
 "
 " Maps :
-"   F1 => help system
+"   F1 => help system for the word under the cursor
 "   F2 =>
 "   F3 =>
 "   F4 => Execute python script
@@ -41,6 +41,7 @@
 " Other plugins you could be interested by :
 "   NERDCommenter => http://www.vim.org/scripts/script.php?script_id=1218
 "   Pydoc => http://www.vim.org/scripts/script.php?script_id=910
+"       \pw to see definition for word under the cursor
 "   AutoComplPop => http://www.vim.org/scripts/script.php?script_id=1879
 "   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
 "   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
@@ -200,7 +201,7 @@ fun CleanText()
     let curline = line(".")
     exe ":retab"
     exe ":%s/ \\+$//e"
-    " Replace {% var %} and {{ var }} by {% var %} and {{ var }} in the templates
+    " add spaces to {% var %} and {{ var }} in the templates if missing
     " silent will hide the press-Enter
     " ge will hide the Not Found errors raised
     silent :%s/[^ ]\zs\ze[ %}]}/ /ge
@@ -291,3 +292,6 @@ noremap! <Right> <Esc>
 
 set wildmenu " Enable menu at the bottom of the vim window
 set wildmode=list:longest,full
+
+" Use F1 to find the help for the word under the cursor
+map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
