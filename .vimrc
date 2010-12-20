@@ -25,7 +25,7 @@
 "
 " Maps :
 "   F1 => help system for the word under the cursor
-"   F2 =>
+"   F2 => Place a sign in your code (ctrl-F2 to remove it)
 "   F3 =>
 "   F4 => Execute python script
 "   F5 =>
@@ -72,6 +72,7 @@ set noerrorbells        " Shut the bell
 set spell               " Enable spellchecking
 set spelllang=en,fr     " spellchecking english and french
 set spellsuggest=10     " 10 alternative spelling maximum
+set isfname+=32         " gf support filenames with spaces
 "colorscheme Mahewincs
 
 
@@ -295,3 +296,10 @@ set wildmode=list:longest,full
 
 " Use F1 to find the help for the word under the cursor
 map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
+
+
+" Visible markers
+highlight SignColumn ctermbg=darkgrey
+sign define information text=!> linehl=Warning texthl=Error
+map <F2> :exe ":sign place 08111987 line=" . line(".") ." name=information file=" . expand("%:p")<CR>
+"map <C-F2> :sign unplace<CR> TODO broken
