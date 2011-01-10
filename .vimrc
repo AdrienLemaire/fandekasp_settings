@@ -69,11 +69,12 @@ set showcmd             " Display incomplete commands
 set ttyfast             " Fast terminal connection
 set title               " Name of the file in the window tab's title
 set noerrorbells        " Shut the bell
-set spell               " Enable spellchecking
-set spelllang=en,fr     " spellchecking english and french
-set spellsuggest=10     " 10 alternative spelling maximum
+"set spell               " Enable spellchecking
+"set spelllang=en,fr     " spellchecking english and french
+"set spellsuggest=10     " 10 alternative spelling maximum
 set isfname+=32         " gf support filenames with spaces
-"colorscheme Mahewincs
+"colorscheme xoria256
+set t_Co=256            " get 256 colors in term
 
 
 " Tooltips
@@ -265,8 +266,8 @@ if version >= 700
     au InsertEnter * hi StatusLine term=underline ctermbg=3 gui=underline
     au InsertLeave * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
     " Cursor
-    highlight CursorLine ctermbg=LightYellow cterm=bold
-    highlight CursorColumn ctermbg=LightYellow cterm=bold
+    highlight CursorLine ctermbg=233 cterm=bold
+    highlight CursorColumn ctermbg=233 cterm=bold
 endif
 
 
