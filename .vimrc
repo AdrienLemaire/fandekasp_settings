@@ -203,7 +203,7 @@ fun CleanText()
     let curline = line(".")
     exe ":retab"
     exe ":%s/ \\+$//e"
-    " add spaces to {% var %} and {{ var }} in the templates if missing
+    " add spaces to {% var %} and {{ var  }} in the templates if missing
     " silent will hide the press-Enter
     " ge will hide the Not Found errors raised
     silent :%s/[^ ]\zs\ze[ %}]}/ /ge
@@ -304,3 +304,24 @@ highlight SignColumn ctermbg=darkgrey
 sign define information text=!> linehl=Warning texthl=Error
 map <F2> :exe ":sign place 08111987 line=" . line(".") ." name=information file=" . expand("%:p")<CR>
 "map <C-F2> :sign unplace<CR> TODO broken
+
+
+function SetTimeOfDayColors()
+" progressively check higher values... falls out on first "true"
+" (note addition of zero ... this guarantees return from function is numeric)
+    let currentHour = strftime("%H")
+    echo "currentHour is " . currentHour
+    if currentHour < 6 + 0
+        let colorScheme = "darkblue"
+    elseif currentHour < 12 + 0
+        let colorScheme = "default"
+    elseif currentHour < 18 + 0
+        let colorScheme = "shine"
+    else
+        let colorScheme = "evening"
+    endif
+        echo "setting color scheme to " . colorScheme
+    execute "colorscheme " . colorScheme
+endfunction
+
+call SetTimeOfDayColors()
