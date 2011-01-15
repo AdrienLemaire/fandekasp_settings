@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 15, 2011  06:19PM
+" Last Modified: Sat Jan 15, 2011  06:28PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -201,3 +201,5 @@ source ~/.vim/vimrc/vimrc_python.vim
 " Section: LaTeX
 " ==============
 source ~/.vim/vimrc/vimrc_latex.vim
+
+" NOTE: Maybe I should instead create .vim/ftplugin/language.vim files
