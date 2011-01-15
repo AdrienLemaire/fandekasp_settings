@@ -1,12 +1,19 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimrc example for Python developer
-" Author: Adrien Lemaire <lemaire.adrien@gmail.com>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
+" File:          .vimrc
+" Description:   vim global configuration
+" Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
+" Version:       2.0
+" Last Modified: Sat Jan 15, 2011  05:49PM
+" License:       This program is free software. It comes without any warranty,
+"                to the extent permitted by applicable law. You can redistribute
+"                it and/or modify it under the terms of the Do What The Fuck You
+"                Want To Public License, Version 2, as published by Sam Hocevar.
+"                See http://sam.zoy.org/wtfpl/COPYING for more details.
+"==============================================================================
 "
 " -> Verify that vim has been compiled with +python
 "
-"
-" Required plugins and libraries:
+" Required Plugins And Libraries:
 "   indent => http://www.vim.org/scripts/script.php?script_id=974
 "   Syntax Color => http://www.vim.org/scripts/script.php?script_id=790
 "   taglist => http://vim.sourceforge.net/scripts/script.php?script_id=273
@@ -23,7 +30,7 @@
 "   doctest => http://www.vim.org/scripts/script.php?script_id=1867
 "
 "
-" Maps :
+" Maps:
 "   F1 => help system for the word under the cursor
 "   F2 => Place a sign in your code (ctrl-F2 to remove it)
 "   F3 =>
@@ -38,7 +45,7 @@
 "   F12 =>
 "
 "
-" Other plugins you could be interested by :
+" Other Plugins You Could Be Interested By:
 "   NERDCommenter => http://www.vim.org/scripts/script.php?script_id=1218
 "   Pydoc => http://www.vim.org/scripts/script.php?script_id=910
 "       \pw to see definition for word under the cursor
@@ -75,8 +82,119 @@ set noerrorbells        " Shut the bell
 set isfname+=32         " gf support filenames with spaces
 "colorscheme xoria256
 set t_Co=256            " get 256 colors in term
+if v:version >= 703
+    set colorcolumn=80      " Coloration of the 80th column
+    set cursorcolumn
+    set cursorline
+endif
+
+if &t_Co> 2 || has("gui_running")
+    " When terminal has colors, active syntax coloration
+    syntax on
+    set hlsearch " Highlight results
+    " TIP: Type 'nohl' to remove highlight
+    set incsearch " Highlight of the first matching string
+    set smartcase " Highlight first matching string using history
+endif
+
+if has("autocmd")
+    filetype on
+    filetype plugin indent on
+    autocmd BufRead *.txt set tw=78
+    au BufRead,BufNewFile *.txt set filetype=doctest " coloration with doctest.vim
+else
+    set autoindent " always set autoindenting on
+endif
+
+if has("mouse")
+    set mouse=a " mouse enabled in vim
+endif
+
+" Show hidden characters like tab or endl
+set list
+set lcs:tab:>-,trail:.
+
+set backup " Keep a backup file
+if !filewritable($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup", "p") " Creation of the backup dir
+endif
+set backupdir=$HOME/.vim/backup " directory for ~ files
+set directory=.,./.backup,/tmp
+
+" Visible markers
+highlight SignColumn ctermbg=darkgrey
+sign define information text=!> linehl=Warning texthl=Error
+map <F2> :exe ":sign place 08111987 line=" . line(".") ." name=information file=" . expand("%:p")<CR>
+"map <C-F2> :sign unplace<CR> TODO broken
+
+" Deactivate keyboard arrows
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
+
+set wildmenu " Enable menu at the bottom of the vim window
+set wildmode=list:longest,full
+
+" Use F1 to find the help for the word under the cursor
+map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
+
+" List classes and methods in the opened files
+map <F8> :TlistToggle<cr>
+let Tlist_GainFocus_On_ToggleOpen=0
+let Tlist_Exit_OnlyWindow=1
+
+" better statusline
+" left side
+set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
+set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]
+" right side
+set statusline+=\ %=\ %0.((%l,%v%))%5.p%%/%L
+"set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
+set laststatus=2
+if version >= 700
+    " Filename
+    highlight User1 cterm=bold ctermfg=4 ctermbg=Black
+    highlight User2 term=bold,underline cterm=bold,underline gui=bold,underline
+    " Search
+    highlight Search term=standout ctermfg=4 ctermbg=7
+    " SplitLine
+    highlight VertSplit ctermbg=red ctermfg=Black guibg=red
+    au VimEnter * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
+    " statusline color change when in insert mode
+    au InsertEnter * hi StatusLine term=underline ctermbg=3 gui=underline
+    au InsertLeave * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
+    " Cursor
+    highlight CursorLine ctermbg=233 cterm=bold
+    highlight CursorColumn ctermbg=233 cterm=bold
+endif
 
 
+
+
+" Section: Functions
+" ==================
+
+" Function: LastModified
+" If buffer modified, update any 'Last modified: ' in the first 20 lines.
+" 'Last modified: ' can have up to 10 characters before (they are retained).
+" Restores cursor and window position using save_cursor variable.
+function! LastModified()
+  if &modified
+    let save_cursor = getpos(".")
+    let n = min([20, line("$")])
+    exe '1,' . n . 's#^\(.\{,10}Last Modified: \).*#\1' .
+          \ strftime('%a %b %d, %Y  %I:%M%p') . '#e'
+    call setpos('.', save_cursor)
+  endif
+endfun
+autocmd BufWritePre * call LastModified()
+
+" Function: SetTimeOfDayColors
 " Function to change the colorscheme depending on the hour of the day
 "let g:colors_name="xyzzy"
 let g:Favcolorschemes = ["darkblue", "default", "shine", "evening"]
@@ -90,6 +208,7 @@ function SetTimeOfDayColors()
 endfunction
 "call SetTimeOfDayColors()
 
+" Function: FoldSpellBalloon
 " Tooltips
 function! FoldSpellBalloon()
     let foldStart = foldclosed(v:beval_lnum )
@@ -118,208 +237,11 @@ set balloonexpr=FoldSpellBalloon()
 set ballooneval
 
 
-if v:version >= 703
-    set colorcolumn=80      " Coloration of the 80th column
-    set cursorcolumn
-    set cursorline
-endif
+" Section: Python
+" ===============
+source ~/.vim/vimrc/vimrc_python.vim
 
 
-if &t_Co> 2 || has("gui_running")
-    " When terminal has colors, active syntax coloration
-    syntax on
-    set hlsearch " Highlight results
-    " TIP: Type 'nohl' to remove highlight
-    set incsearch " Highlight of the first matching string
-    set smartcase " Highlight first matching string using history
-endif
-
-
-if has("autocmd")
-    autocmd BufRead *.txt set tw=78
-    autocmd BufRead *.py set tw=79 " 79 characters max on python files
-    " ---- is it useful ? ----
-    "augroup cprog
-        "" Remove all cprog autocommands
-        "au!
-        "autocmd FileType * set formatoptions=tcql nocindent comments&
-    " ------------------------
-    filetype on
-    filetype plugin indent on
-    "autocmd FileType python compiler pylint
-    autocmd BufNewFile,BufRead *.py compiler nose
-    au BufRead,BufNewFile *.txt set filetype=doctest " coloration with doctest.vim
-    set omnifunc=pythoncomplete#Complete " Python autocompletion !
-    let g:pydiction_location = "~/.vim/dicts/"
-    let g:pydiction_menu_height = 20
-else
-    set autoindent " always set autoindenting on
-endif
-
-
-if has("mouse")
-    set mouse=a " mouse enabled in vim
-endif
-
-
-" Show hidden characters like tab or endl
-set list
-set lcs:tab:>-,trail:.
-
-
-" highlight trailing spaces
-"highlight RedundantSpaces ctermbg=red guibg=red  USELESS
-"match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
-
-
-set backup " Keep a backup file
-if !filewritable($HOME."/.vim/backup")
-    call mkdir($HOME."/.vim/backup", "p") " Creation of the backup dir
-endif
-set backupdir=$HOME/.vim/backup " directory for ~ files
-set directory=.,./.backup,/tmp
-
-
-" ------- Cleaning stuff ---------
-function <SID>Pep8()
-  set lazyredraw
-  " Close any existing cwindows.
-  cclose
-  let l:grepformat_save = &grepformat
-  let l:grepprogram_save = &grepprg
-  set grepformat&vim
-  set grepformat&vim
-  let &grepformat = '%f:%l:%m'
-  let &grepprg = 'pep8 --repeat'
-  if &readonly == 0 | update | endif
-  silent! grep! %
-  let &grepformat = l:grepformat_save
-  let &grepprg = l:grepprogram_save
-  let l:mod_total = 0
-  let l:win_count = 1
-  " Determine correct window height
-  windo let l:win_count = l:win_count + 1
-  if l:win_count <= 2 | let l:win_count = 4 | endif
-  windo let l:mod_total = l:mod_total + winheight(0)/l:win_count |
-        \ execute 'resize +'.l:mod_total
-  " Open cwindow
-  execute 'belowright copen '.l:mod_total
-  nnoremap <buffer> <silent> c :cclose<CR>
-  set nolazyredraw
-  redraw!
-endfunction
-
-
-fun CleanText()
-    " Remove trailing spaces
-    let curcol = col(".")
-    let curline = line(".")
-    exe ":retab"
-    exe ":%s/ \\+$//e"
-    " add spaces to {% var %} and {{ var  }} in the templates if missing
-    " silent will hide the press-Enter
-    " ge will hide the Not Found errors raised
-    silent :%s/[^ ]\zs\ze[ %}]}/ /ge
-    silent :%s/{[%{]\zs\ze[^ ]/ /ge
-    "exe ':%s/[^ ]\zs\ze[ %}]}/ /g'
-    "exe ':%s/{[%{]\zs\ze[^ ]/ /g'
-    set nolazyredraw
-    call cursor(curline, curcol)
-    if &filetype == 'python'
-        " if the current file is in python, we launch pep8
-        call <SID>Pep8()
-    endif
-endfun
-
-map <F6> :call CleanText()<CR>
-" ------- end Cleaning stuff ---------
-
-
-fun ExecPython()
-    " Try to execute the script in python 2.6, else python 3.1
-    try
-        pyf @%
-    catch
-        silent !python3.1 %
-        " PS: if you launch a graphical interface such as a pygame script, your
-        " vim window may be all black. In this case, redraw the vim window with
-        " ^L
-    endtry
-endfun
-" Execute the python script from vim
-map <silent> <F4> :call ExecPython()<CR>
-
-
-" Python syntax test from syntax/python.vim plugin
-let python_highlight_all = 1
-
-
-" Ignore some files with tab autocompletion
-set suffixes=*~,*.pyc,*.pyo
-
-
-" Red background to highlight searched patterns
-hi Search  term=reverse ctermbg=Red ctermfg=White guibg=Red guifg=White
-
-
-" better statusline
-" left side
-set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
-set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]
-" right side
-set statusline+=\ %=\ %0.((%l,%v%))%5.p%%/%L
-"set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
-set laststatus=2
-if version >= 700
-    " Filename
-    highlight User1 cterm=bold ctermfg=4 ctermbg=Black
-    highlight User2 term=bold,underline cterm=bold,underline gui=bold,underline
-    " Search
-    highlight Search term=standout ctermfg=4 ctermbg=7
-    " SplitLine
-    highlight VertSplit ctermbg=red ctermfg=Black guibg=red
-    au VimEnter * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
-    " statusline color change when in insert mode
-    au InsertEnter * hi StatusLine term=underline ctermbg=3 gui=underline
-    au InsertLeave * hi StatusLine term=bold ctermfg=DarkRed ctermbg=7 gui=bold
-    " Cursor
-    highlight CursorLine ctermbg=233 cterm=bold
-    highlight CursorColumn ctermbg=233 cterm=bold
-endif
-
-
-" List classes and methods in the opened files
-map <F8> :TlistToggle<cr>
-let Tlist_GainFocus_On_ToggleOpen=0
-let Tlist_Exit_OnlyWindow=1
-
-
-" Disable quickfix for pyflakes
-let g:pyflakes_use_quickfix = 0
-
-
-" Deactivate keyboard arrows
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
-
-
-set wildmenu " Enable menu at the bottom of the vim window
-set wildmode=list:longest,full
-
-" Use F1 to find the help for the word under the cursor
-map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
-
-
-" Visible markers
-highlight SignColumn ctermbg=darkgrey
-sign define information text=!> linehl=Warning texthl=Error
-map <F2> :exe ":sign place 08111987 line=" . line(".") ." name=information file=" . expand("%:p")<CR>
-"map <C-F2> :sign unplace<CR> TODO broken
-
-
+" Section: LaTeX
+" ==============
+source ~/.vim/vimrc/vimrc_latex.vim
