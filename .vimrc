@@ -77,6 +77,19 @@ set isfname+=32         " gf support filenames with spaces
 set t_Co=256            " get 256 colors in term
 
 
+" Function to change the colorscheme depending on the hour of the day
+"let g:colors_name="xyzzy"
+let g:Favcolorschemes = ["darkblue", "default", "shine", "evening"]
+function SetTimeOfDayColors()
+    " currentHour will be 0, 1, 2, or 3
+    let g:CurrentHour = (strftime("%H") + 0) / 6
+    if g:colors_name !~ g:Favcolorschemes[g:CurrentHour]
+        execute "colorscheme " . g:Favcolorschemes[g:CurrentHour] 
+        redraw
+    endif
+endfunction
+"call SetTimeOfDayColors()
+
 " Tooltips
 function! FoldSpellBalloon()
     let foldStart = foldclosed(v:beval_lnum )
@@ -250,8 +263,12 @@ hi Search  term=reverse ctermbg=Red ctermfg=White guibg=Red guifg=White
 
 
 " better statusline
+" left side
 set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
-set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]\ %=%0.((%l,%v%))%5.p%%/%L
+set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]
+" right side
+set statusline+=\ %=\ %0.((%l,%v%))%5.p%%/%L
+"set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
 set laststatus=2
 if version >= 700
     " Filename
@@ -306,22 +323,3 @@ map <F2> :exe ":sign place 08111987 line=" . line(".") ." name=information file=
 "map <C-F2> :sign unplace<CR> TODO broken
 
 
-function SetTimeOfDayColors()
-" progressively check higher values... falls out on first "true"
-" (note addition of zero ... this guarantees return from function is numeric)
-    let currentHour = strftime("%H")
-    echo "currentHour is " . currentHour
-    if currentHour < 6 + 0
-        let colorScheme = "darkblue"
-    elseif currentHour < 12 + 0
-        let colorScheme = "default"
-    elseif currentHour < 18 + 0
-        let colorScheme = "shine"
-    else
-        let colorScheme = "evening"
-    endif
-        echo "setting color scheme to " . colorScheme
-    execute "colorscheme " . colorScheme
-endfunction
-
-call SetTimeOfDayColors()
