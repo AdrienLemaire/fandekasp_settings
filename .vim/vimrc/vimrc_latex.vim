@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 15, 2011  05:50PM
+" Last Modified: Sun Jan 16, 2011  08:32PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -38,3 +38,6 @@ set sw=2
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 set iskeyword+=:
+
+"let g:Tex_ViewRule_pdf='open -a preview'
+"let g:Tex_ViewRuleComplete_pdf='open -a preview'
