@@ -3,7 +3,7 @@
 " Description:   vim specific configuration for python
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 15, 2011  05:47PM
+" Last Modified: Thu Jan 27, 2011  10:30PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -31,7 +31,7 @@ function <SID>Pep8()
   set grepformat&vim
   set grepformat&vim
   let &grepformat = '%f:%l:%m'
-  let &grepprg = 'pep8 --repeat'
+  let &grepprg = 'flake8'
   if &readonly == 0 | update | endif
   silent! grep! %
   let &grepformat = l:grepformat_save

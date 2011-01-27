@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 15, 2011  06:19PM
+" Last Modified: Thu Jan 27, 2011  10:50PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -110,7 +110,7 @@ set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
 set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]
 " right side
 set statusline+=\ %=\ %0.((%l,%v%))%5.p%%/%L
-"set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
+set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
 set laststatus=2
 if version >= 700
     " Filename
@@ -152,8 +152,8 @@ autocmd BufWritePre * call LastModified()
 
 " Function: SetTimeOfDayColors
 " Function to change the colorscheme depending on the hour of the day
-"let g:colors_name="xyzzy"
-let g:Favcolorschemes = ["darkblue", "default", "shine", "evening"]
+let g:colors_name="xyzzy"
+let g:Favcolorschemes = ["darkblue", "default", "shine", "adrian"]
 function SetTimeOfDayColors()
     " currentHour will be 0, 1, 2, or 3
     let g:CurrentHour = (strftime("%H") + 0) / 6
@@ -162,7 +162,7 @@ function SetTimeOfDayColors()
         redraw
     endif
 endfunction
-"call SetTimeOfDayColors()
+call SetTimeOfDayColors()
 
 " Function: FoldSpellBalloon
 " Tooltips
