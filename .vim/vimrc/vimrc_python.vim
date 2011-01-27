@@ -3,7 +3,7 @@
 " Description:   vim specific configuration for python
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Thu Jan 27, 2011  10:30PM
+" Last Modified: Thu Jan 27, 2011  11:18PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -63,8 +63,8 @@ fun CleanText()
     " ge will hide the Not Found errors raised
     silent :%s/[^ ]\zs\ze[ %}]}/ /ge
     silent :%s/{[%{]\zs\ze[^ ]/ /ge
-    "exe ':%s/[^ ]\zs\ze[ %}]}/ /g'
-    "exe ':%s/{[%{]\zs\ze[^ ]/ /g'
+    " Put 2 empty lines before a class (take the decorators into account)
+    silent :%s/\(@\w*\)\@<!\n*\(\(\n@\w*\)*\n\(class\|def\) \)\@=/\r\r/ge
     set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
