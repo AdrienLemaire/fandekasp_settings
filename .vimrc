@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Thu Jan 27, 2011  10:50PM
+" Last Modified: Fri Jan 28, 2011  02:33PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -153,7 +153,7 @@ autocmd BufWritePre * call LastModified()
 " Function: SetTimeOfDayColors
 " Function to change the colorscheme depending on the hour of the day
 let g:colors_name="xyzzy"
-let g:Favcolorschemes = ["darkblue", "default", "shine", "adrian"]
+let g:Favcolorschemes = ["darkblue", "Molokai", "candycode", "adrian"]
 function SetTimeOfDayColors()
     " currentHour will be 0, 1, 2, or 3
     let g:CurrentHour = (strftime("%H") + 0) / 6
