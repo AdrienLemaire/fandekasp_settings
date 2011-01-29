@@ -3,16 +3,28 @@ HISTSIZE=200
 SAVEHIST=200
 HISTFILE=~/.history
 export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH # use brew python2.7
-export GIT_EDITOR=/usr/local/bin/mvim # use MacVim for the commits
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH # give brew priority
+export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH # for SIP, used by PyQt4
+export EDITOR="/usr/local/bin/mvim -f"  # use MacVim for the commits
 export WORKON_HOME=$HOME/Envs
 #export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python # use brew python2.7
 source virtualenvwrapper.sh
+
 
 
 #### ALIASES ######
 alias ls="ls -G"
 alias ll="ls -Gl"
 alias vim="mvim"
+# git Aliases
+alias gb="git branch"
+alias gba="git branch -a"
+alias gc="git commit -v"
+alias gd="git diff | gvim"
+alias gl="git pull"
+alias gp="git push"
+alias gst="git status"
+# project aliases
 alias jap="cd ~/Documents/Programming/Python/learn_japanese"
 alias dream="cd ~/Documents/Programming/Python/LucidDreamingBox"
 
