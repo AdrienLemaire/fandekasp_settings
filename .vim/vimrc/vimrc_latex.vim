@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sun Jan 16, 2011  08:32PM
+" Last Modified: Sat Jan 29, 2011  12:33PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
