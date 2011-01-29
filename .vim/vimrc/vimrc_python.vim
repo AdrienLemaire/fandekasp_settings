@@ -3,7 +3,7 @@
 " Description:   vim specific configuration for python
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Thu Jan 27, 2011  11:18PM
+" Last Modified: Sat Jan 29, 2011  09:32AM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -65,6 +65,10 @@ fun CleanText()
     silent :%s/{[%{]\zs\ze[^ ]/ /ge
     " Put 2 empty lines before a class (take the decorators into account)
     silent :%s/\(@\w*\)\@<!\n*\(\(\n@\w*\)*\n\(class\|def\) \)\@=/\r\r/ge
+    " Put spaces between == if there aren't
+    silent :%s/\(\S\)\@===\(\S\)\@=/ == /ge
+    " Put a space after a coma if missing
+    "silent :%s/,\(\S\)\@=/, /ge
     set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
