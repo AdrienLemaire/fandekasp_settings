@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 29, 2011  12:33PM
+" Last Modified: Sun Jan 30, 2011  09:22PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -41,3 +41,8 @@ set iskeyword+=:
 
 "let g:Tex_ViewRule_pdf='open -a preview'
 "let g:Tex_ViewRuleComplete_pdf='open -a preview'
+
+
+
+" prefill a dream.tex files with a template <= used by LucidDreamingBox program
+autocmd BufNewFile *dream.tex   0r ~/.vim/templates/dream.tex
