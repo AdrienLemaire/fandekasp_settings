@@ -15,7 +15,7 @@ source virtualenvwrapper.sh
 #### ALIASES ######
 alias ls="ls -G"
 alias ll="ls -Gl"
-alias vim="mvim"
+alias vim="mvim --remote-tab"
 # git Aliases
 alias gb="git branch"
 alias gba="git branch -a"

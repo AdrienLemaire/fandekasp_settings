@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Fri Jan 28, 2011  02:33PM
+" Last Modified: Sat Jan 29, 2011  07:11PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -36,7 +36,6 @@ set noerrorbells        " Shut the bell
 "set spelllang=en,fr     " spellchecking english and french
 "set spellsuggest=10     " 10 alternative spelling maximum
 set isfname+=32         " gf support filenames with spaces
-"colorscheme xoria256
 set t_Co=256            " get 256 colors in term
 if v:version >= 703
     set colorcolumn=80      " Coloration of the 80th column
@@ -153,7 +152,7 @@ autocmd BufWritePre * call LastModified()
 " Function: SetTimeOfDayColors
 " Function to change the colorscheme depending on the hour of the day
 let g:colors_name="xyzzy"
-let g:Favcolorschemes = ["darkblue", "Molokai", "candycode", "adrian"]
+let g:Favcolorschemes = ["darkblue", "Molokai", "candycode", "anotherdark"]
 function SetTimeOfDayColors()
     " currentHour will be 0, 1, 2, or 3
     let g:CurrentHour = (strftime("%H") + 0) / 6

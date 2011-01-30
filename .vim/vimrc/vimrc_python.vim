@@ -3,7 +3,7 @@
 " Description:   vim specific configuration for python
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Sat Jan 29, 2011  09:32AM
+" Last Modified: Sun Jan 30, 2011  08:41AM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -22,7 +22,7 @@ endif
 
 
 " ------- Cleaning stuff ---------
-function <SID>Pep8()
+function <SID>Flake8()
   set lazyredraw
   " Close any existing cwindows.
   cclose
@@ -69,11 +69,14 @@ fun CleanText()
     silent :%s/\(\S\)\@===\(\S\)\@=/ == /ge
     " Put a space after a coma if missing
     "silent :%s/,\(\S\)\@=/, /ge
+    " Remove unwanted spaces after ( or before )
+    silent :%s/( /(/ge
+    silent :%s/ )/)/ge  " you can do better ...
     set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
-        " if the current file is in python, we launch pep8
-        call <SID>Pep8()
+        " if the current file is in python, we launch flake8
+        call <SID>Flake8()
     endif
 endfun
 
