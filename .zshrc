@@ -15,7 +15,8 @@ source virtualenvwrapper.sh
 #### ALIASES ######
 alias ls="ls -G"
 alias ll="ls -Gl"
-alias vim="mvim --remote-tab"
+# open a file in a new tab of the latest MacVim window opened
+alias vim="mvim --servername `mvim --serverlist|tail -1` --remote-tab-silent"
 # git Aliases
 alias gb="git branch"
 alias gba="git branch -a"
