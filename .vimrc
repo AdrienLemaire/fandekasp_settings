@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Mon Jan 31, 2011  09:27AM
+" Last Modified: Thu Apr 07, 2011  07:53PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -128,7 +128,28 @@ if version >= 700
     highlight CursorColumn ctermbg=233 cterm=bold
 endif
 
+" Google translator
+let g:langpair="fr|en"
+let g:vtranslate="T"
 
+" Pathogen: Easy manipulation of 'runtimepath', 'path', 'tags', etc
+call pathogen#runtime_append_all_bundles()
+
+
+" .vimrc autoreload
+autocmd BufWritePost .vimrc source %
+
+" SnipMate
+" Put this in plugin/snipMate.vim to get autocompletion
+ "fun! GetSnipsInCurrentScope() 
+    "let snips = {} 
+    "for scope in [bufnr('%')] + split(&ft, '\.') + ['_'] 
+      "call extend(snips, get(s:snippets, scope, {}), 'keep') 
+      "call extend(snips, get(s:multi_snips, scope, {}), 'keep') 
+    "endfor 
+    "return snips 
+  "endf 
+" 
 
 
 " Section: Functions
@@ -153,7 +174,7 @@ autocmd BufWritePre * call LastModified()
 " Function to change the colorscheme depending on the hour of the day
 let g:colors_name="xyzzy"
 let g:Favcolorschemes = ["darkblue", "molokai", "candycode", "anotherdark"]
-function SetTimeOfDayColors()
+function! SetTimeOfDayColors()
     " currentHour will be 0, 1, 2, or 3
     let g:CurrentHour = (strftime("%H") + 0) / 6
     if g:colors_name !~ g:Favcolorschemes[g:CurrentHour]
