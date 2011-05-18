@@ -51,3 +51,4 @@ Other Plugins You Could Be Interested By::
   Bicycle Repair Man => http://bicyclerepair.sourceforge.net/
   SnipMate => http://www.vim.org/scripts/script.php?script_id=2540
   python_match => http://www.vim.org/scripts/script.php?script_id=386
+  vst => http://www.vim.org/scripts/script.php?script_id=1334
