@@ -3,7 +3,7 @@
 " Description:   vim specific configuration for python
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Thu Apr 07, 2011  08:15PM
+" Last Modified: Mon May 23, 2011  05:35AM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -16,7 +16,7 @@ if has("autocmd")
     "autocmd FileType python compiler pylint
     autocmd BufNewFile,BufRead *.py compiler nose
     set omnifunc=pythoncomplete#Complete " Python autocompletion !
-    "let g:pydiction_location = "~/.vim/dicts/"
+    let g:pydiction_location = "~/.vim/dicts/"
     let g:pydiction_menu_height = 20
 endif
 

@@ -3,7 +3,7 @@
 " Description:   vim global configuration
 " Maintainer:    Adrien Lemaire <lemaire.adrien@gmail.com>
 " Version:       2.0
-" Last Modified: Wed May 18, 2011  10:13AM
+" Last Modified: Sun Jun 12, 2011  12:25PM
 " License:       This program is free software. It comes without any warranty,
 "                to the extent permitted by applicable law. You can redistribute
 "                it and/or modify it under the terms of the Do What The Fuck You
@@ -29,7 +29,7 @@ set expandtab           " Convert tabs into spaces
 set tw=80               " 80 characters max per line
 set nu                  " Display the number of each line
 set showcmd             " Display incomplete commands
-set ttyfast             " Fast terminal connection
+set ttyfast             " Fast terminal connection 
 set title               " Name of the file in the window tab's title
 set noerrorbells        " Shut the bell
 "set spell               " Enable spellchecking
@@ -51,6 +51,11 @@ if &t_Co> 2 || has("gui_running")
     set incsearch " Highlight of the first matching string
     set smartcase " Highlight first matching string using history
 endif
+
+filetype off
+" Pathogen: Easy manipulation of 'runtimepath', 'path', 'tags', etc
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 if has("autocmd")
     filetype on
@@ -133,9 +138,6 @@ endif
 let g:langpair="fr|en"
 let g:vtranslate="T"
 
-" Pathogen: Easy manipulation of 'runtimepath', 'path', 'tags', etc
-call pathogen#runtime_append_all_bundles()
-
 
 " .vimrc autoreload
 autocmd BufWritePost .vimrc source %
@@ -173,17 +175,36 @@ autocmd BufWritePre * call LastModified()
 
 " Function: SetTimeOfDayColors
 " Function to change the colorscheme depending on the hour of the day
-let g:colors_name="xyzzy"
-let g:Favcolorschemes = ["darkblue", "molokai", "candycode", "anotherdark"]
+let g:colors_name="Mahewincs"
+"let g:Favcolorschemes = ["darkblue", "molokai", "candycode", "anotherdark"]
+let g:Favcolorschemes = ["candycode", "candycode", "candycode", "candycode"]
+highlight Normal ctermbg=Black ctermfg=White
+highlight CursorColumn term=reverse ctermbg=234 guibg=#293739
+highlight CursorLine term=underline ctermbg=234 guibg=#293739
 function! SetTimeOfDayColors()
-    " currentHour will be 0, 1, 2, or 3
+" currentHour will be 0, 1, 2, or 3
     let g:CurrentHour = (strftime("%H") + 0) / 6
     if g:colors_name !~ g:Favcolorschemes[g:CurrentHour]
-        execute "colorscheme " . g:Favcolorschemes[g:CurrentHour] 
+        execute "colorscheme " . g:Favcolorschemes[g:CurrentHour]
         redraw
     endif
 endfunction
 call SetTimeOfDayColors()
+"" Function: SetTimeOfDayColors
+"" Function to change the colorscheme depending on the hour of the day
+""runtime! plugin/guicolorscheme.vim
+"let g:colors_name = "molokai"
+"let g:Favcolorschemes = ["molokai", "darkblue", "candycode", "anotherdark"]
+"highlight Normal ctermbg=Black ctermfg=White
+"function! SetTimeOfDayColors()
+"    " currentHour will be 0, 1, 2, or 3
+"    let g:CurrentHour = (strftime("%H") + 0) / 6
+"    if g:colors_name !~ g:Favcolorschemes[g:CurrentHour]
+"        "execute "colorscheme " . g:Favcolorschemes[g:CurrentHour]
+"        redraw
+"    endif
+"endfunction
+"call SetTimeOfDayColors()
 
 " Function: FoldSpellBalloon
 " Tooltips
@@ -213,6 +234,9 @@ call SetTimeOfDayColors()
 "set balloonexpr=FoldSpellBalloon()
 "set ballooneval
 
+let mapleader = ","
+
+let g:snips_author = "Adrien Lemaire"
 
 " Section: Python
 " ===============
