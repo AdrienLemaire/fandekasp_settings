@@ -1,0 +1,4 @@
+[ui]
+; editor used to enter commit logs, etc.  Most text editors will work.
+editor = vim
+username = Adrien Lemaire <lemaire.adrien@gmail.com>

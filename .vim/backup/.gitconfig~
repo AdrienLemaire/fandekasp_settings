@@ -1,0 +1,20 @@
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+[user]
+    name = Adrien Lemaire
+    ;email = adrien.lemaire@aquasys.co.jp
+    email = lemaire.adrien@gmail.com
+[alias]
+    ci = commit
+    co = checkout
+    st = status
+    br = branch
+[github]
+    user = Fandekasp
+    token = 3171a6a622096be30dc7d9d3ebab5cbe
+[core]
+    editor = vim
+[merge]
+    tool = vim

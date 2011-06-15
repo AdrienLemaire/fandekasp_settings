@@ -1,0 +1,24 @@
+port                    "6600"
+music_directory         "~/Music"
+playlist_directory      "~/.mpd/playlists"
+db_file                 "~/.mpd/mpd.db"
+log_file                "~/.mpd/mpd.log"
+
+audio_output {
+         type                    "alsa"
+         name                    "My ALSA Device"
+         device                  "hw:0,0"     # optional
+         format                  "44100:16:2" # optional
+}
+
+audio_output {
+       type    "jack"
+       name    "my jack device"
+}
+
+audio_output {
+        type                    "fifo"
+        name                    "ncmpcpp visualizer"
+        path                    "/tmp/mpd.fifo"
+        format                  "44100:16:1"
+}

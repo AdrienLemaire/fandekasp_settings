@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/dori/Envs/marketplace/lib/python2.6/site-packages/admin_tools'
+let g:netrw_dirhist_2='/home/dori/Envs/marketplace/src/critic/critic'
+let g:netrw_dirhist_3='/home/dori/git_projects/marketplace/middleware'
+let g:netrw_dirhist_4='/home/dori/git_projects/fandekasp/templates'
+let g:netrw_dirhist_5='/home/dori/git_projects/fandekasp/reinforcement_learning/programs/10-armed_testbed'
+let g:netrw_dirhist_6='/home/dori/git_projects/django-nuages'
+let g:netrw_dirhist_7='/home/dori/Envs/fandekasp/lib/python2.7/site-packages/django'

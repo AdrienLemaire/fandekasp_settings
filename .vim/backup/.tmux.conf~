@@ -1,0 +1,40 @@
+set-window-option -g mode-keys vi
+set-window-option -g window-status-current-bg red
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-attr 'bold'
+set-window-option -g window-status-current-attr 'bold'
+set-window-option -g window-status-fg black
+set-window-option -g window-status-bg white
+set-window-option -g automatic-rename on
+set-window-option -g utf8 on
+
+set-option -g status-bg blue
+set-option -g status-fg white
+set-option -g status on
+set-option -g status-keys vi
+#set-option -g prefix C-j
+set-option -g mouse-select-pane on
+
+#unbind-key C-b
+#unbind %
+#bind C-h split-window -h
+#unbind '"'
+#bind C-v split-window -v
+#unbind ]
+#bind C-y paste-buffer
+#bind-key C-j send-prefix
+
+set -g set-titles on
+set -g set-titles-string '#S:#I.#P #W'
+set -g status-interval 1
+set -g status-left ' #[fg=green,bold]#H#[default]'
+set -g status-right '#[fg=yellow,bold]#(cut -d " " -f 1-4 /proc/loadavg)#[default] #[fg=cyan,bold]%Y-%m-%d %H:%M#[default] '
+set -g history-limit 5000
+
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Set a good layout 
+bind F2 select-layout -t aquasys:0 "8819,209x58,0,0{178x58,0,0[178x38,0,0,178x19,0,39{85x19,0,39,92x19,86,39}],30x58,179,0[30x20,179,0,30x20,179,21,30x9,179,42,30x6,179,52]}"
+# Fast session kill
+bind -n F12 kill-session

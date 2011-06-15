@@ -1,0 +1,62 @@
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+export ZSH_THEME="adrien"
+#export ZSH_THEME="sporty_256"
+
+# Set to this to use case-sensitive completion
+export CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# export DISABLE_AUTO_TITLE="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+export PATH=/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.4.5
+
+# Personal config
+export WORKON_HOME=$HOME/Envs
+source virtualenvwrapper.sh
+# git Aliases
+alias gb="git branch"
+alias gba="git branch -a"
+alias gc="git commit -v"
+alias gd="git diff | mvim"
+alias gl="git pull"
+alias gp="git push"
+alias gst="git status"
+alias gg="git grep"
+
+#### ALIASES AQUASYS
+alias ssh-projects="ssh adrien.lemaire@projects.aquasys.co.jp"
+alias ssh-test="ssh django@services-test.aquasys.co.jp"
+alias ssh-live="ssh adrien.lemaire@www.aquasys.co.jp"
+
+export EPYTHON="python2.5"
+
+has_virtualenv() {
+    if [ -e .venv ]; then
+        workon `cat .venv`
+    fi
+}
+venv_cd() {
+    cd "$@" && has_virtualenv #&& has_gitbranch
+}
+alias cd="venv_cd"
+
+
