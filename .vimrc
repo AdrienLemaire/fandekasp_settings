@@ -84,3 +84,26 @@ map <leader>r :RopeRename<CR>
 
 " Binding for fuzzy text search via ack (similar to grep)
 nmap <leader>a <Esc>:Ack!
+
+
+""""""""""""""""""""""""
+" INTEGRATION WITH GIT "
+""""""""""""""""""""""""
+
+" Git.vim provides syntax highlighting for git config files
+" fugitive.vim provides an interface for interacting with git including
+" getting diffs, status updates, commiting, and moving files
+
+" Show what branch we are working on
+" better statusline
+" left side
+set statusline=%#User1#%F\ %#User2#%m%r%h%w\ %<%{&ff}%-15.y
+set statusline+=\ [ascii:\%03.3b/hexa:\%02.2B]
+" right side
+set statusline+=\ %=%{fugitive#statusline()}\ %0.((%l,%v%))%5.p%%/%L
+" set statusline+=\ %=\ %{SetTimeOfDayColors()}\ %0.((%l,%v%))%5.p%%/%L
+set laststatus=2
+
+
+
+" Commands to know: Gblame, Gwrite, Gread, Gcommit
