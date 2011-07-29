@@ -58,6 +58,29 @@ let g:pep8_map='<leader>8'
 " make SuperTab context sensitive and enable omni code completion
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+
 " Enable the menu and pydoc preview to get the most useful info out of the
 " code completion. <leader>pwd open a new window with the whole doc page.
 set completeopt=menuone,longest,preview
+
+
+"""""""""""""""""""
+" CODE NAVIGATION "
+"""""""""""""""""""
+
+" With minibufexpl plugin, type :buffers to get the list of buffers
+" Switch buffer: b<number> or :b filenam<tab> with file name autocompletion
+" close a buffer:  :bd or :bw
+
+" command-t settings. by default bound to <leader>t, needs a "rake make" !
+"  supports searching only through opened buffers, instead of files
+" using <leader>b.
+
+map <leader>n :NERDTreeToggle<CR>
+
+" Ropevim settings
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
+
+" Binding for fuzzy text search via ack (similar to grep)
+nmap <leader>a <Esc>:Ack!
