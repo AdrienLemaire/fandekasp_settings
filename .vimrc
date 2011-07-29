@@ -6,6 +6,58 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 
+""""""""""""""""""""
+" General settings "
+""""""""""""""""""""
+
+set nocompatible        " Use vim defaults
+set termencoding=utf-8  " character encoding
+set enc=utf-8
+set fenc=utf-8
+set bs=2                " Authorize all deletion
+set ai                  " Always auto-indent
+set viminfo='20,\"50    " Read/write a .viminfo file, 50 lines max
+set history=200         " Save the last 200 commands in history
+set undolevels=100      " Save the last 200 undos in history
+set ruler               " Always show the cursor
+set shiftwidth=4        " Number of characters per indentation
+set tabstop=4           " Number of spaces per tabulation
+set softtabstop=4       " Number of spaces per backspace
+set expandtab           " Convert tabs into spaces
+set tw=80               " 80 characters max per line
+set nu                  " Display the number of each line
+set showcmd             " Display incomplete commands
+set ttyfast             " Fast terminal connection 
+set title               " Name of the file in the window tab's title
+set noerrorbells        " Shut the bell
+"set spell               " Enable spellchecking
+"set spelllang=en,fr     " spellchecking english and french
+"set spellsuggest=10     " 10 alternative spelling maximum
+set isfname+=32         " gf support filenames with spaces
+set t_Co=256            " get 256 colors in term
+colorscheme dagon     " set colorscheme
+if v:version >= 703
+    set colorcolumn=80      " Coloration of the 80th column
+    "set cursorcolumn
+    "set cursorline
+endif
+
+" Show hidden characters like tab or endl
+set list
+set lcs:tab:>-,trail:.
+
+set backup " Keep a backup file
+if !filewritable($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup", "p") " Creation of the backup dir
+endif
+set backupdir=$HOME/.vim/backup " directory for ~ files
+set directory=.,./.backup,/tmp
+
+let mapleader = ","
+
+let g:snips_author = "Adrien Lemaire"
+
+
 """""""""""""""""""""""""""""""
 " BASIC EDITING AND DEBUGGING "
 """""""""""""""""""""""""""""""
@@ -147,3 +199,5 @@ EOF
 
 " Get code completion for django modules by importing DJANGO_SETTINGS_MODULE
 " add : export DJANGO_SETTINGS_MODULE=project.settings   to .zshrc
+
+
