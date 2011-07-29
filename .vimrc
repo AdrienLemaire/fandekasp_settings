@@ -51,3 +51,13 @@ let g:pyflakes_use_quickfix = 0
 let g:pep8_map='<leader>8'
 
 
+""""""""""""""""""""""""""""""""""""
+" TAB COMPLETION AND DOCUMENTATION "
+""""""""""""""""""""""""""""""""""""
+
+" make SuperTab context sensitive and enable omni code completion
+au FileType python set omnifunc=pythoncomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+" Enable the menu and pydoc preview to get the most useful info out of the
+" code completion. <leader>pwd open a new window with the whole doc page.
+set completeopt=menuone,longest,preview
