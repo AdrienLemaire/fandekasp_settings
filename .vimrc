@@ -35,7 +35,7 @@ set noerrorbells        " Shut the bell
 "set spellsuggest=10     " 10 alternative spelling maximum
 set isfname+=32         " gf support filenames with spaces
 set t_Co=256            " get 256 colors in term
-colorscheme dagon     " set colorscheme
+colorscheme asu1dark     " set colorscheme
 if v:version >= 703
     set colorcolumn=80      " Coloration of the 80th column
     "set cursorcolumn
@@ -199,5 +199,3 @@ EOF
 
 " Get code completion for django modules by importing DJANGO_SETTINGS_MODULE
 " add : export DJANGO_SETTINGS_MODULE=project.settings   to .zshrc
-
-
