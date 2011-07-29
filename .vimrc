@@ -43,3 +43,11 @@ map <leader>g :GundoToggle<CR>
 syntax on                           " syntax highlighing
 filetype on                          " try to detect filetypes
 filetype plugin indent on    " enable loading indent file for filetype
+
+" Don't let pyflakes use the quickfix window
+let g:pyflakes_use_quickfix = 0
+
+" map pep8
+let g:pep8_map='<leader>8'
+
+
