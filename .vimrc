@@ -128,7 +128,11 @@ au BufRead,BufNewFile *.txt set filetype=doctest
 """"""""""""""""""""""""""""""""""""
 
 " make SuperTab context sensitive and enable omni code completion
+autocmd BufRead *.py set tw=79 " 79 characters max on python files
 au FileType python set omnifunc=pythoncomplete#Complete
+autocmd BufNewFile,BufRead *.py compiler nose
+let g:pydiction_location = "~/.vim/dicts/"
+let g:pydiction_menu_height = 20
 let g:SuperTabDefaultCompletionType = "context"
 
 " Enable the menu and pydoc preview to get the most useful info out of the
