@@ -57,6 +57,23 @@ let mapleader = ","
 
 let g:snips_author = "Adrien Lemaire"
 
+" .vimrc autoreload
+autocmd BufWritePost .vimrc source %
+
+" Deactivate keyboard arrows
+noremap  <Up> ""
+noremap! <Up> <Esc>
+noremap  <Down> ""
+noremap! <Down> <Esc>
+noremap  <Left> ""
+noremap! <Left> <Esc>
+noremap  <Right> ""
+noremap! <Right> <Esc>
+
+set wildmenu " Enable menu at the bottom of the vim window
+set wildmode=list:longest,full
+
+
 
 """""""""""""""""""""""""""""""
 " BASIC EDITING AND DEBUGGING "
@@ -102,6 +119,9 @@ let g:pyflakes_use_quickfix = 0
 " map pep8
 let g:pep8_map='<leader>8'
 
+" coloration with doctest.vim
+au BufRead,BufNewFile *.txt set filetype=doctest
+
 
 """"""""""""""""""""""""""""""""""""
 " TAB COMPLETION AND DOCUMENTATION "
@@ -114,6 +134,9 @@ let g:SuperTabDefaultCompletionType = "context"
 " Enable the menu and pydoc preview to get the most useful info out of the
 " code completion. <leader>pwd open a new window with the whole doc page.
 set completeopt=menuone,longest,preview
+
+" Use F1 to find the help for the word under the cursor
+map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
 
 
 """""""""""""""""""
@@ -137,6 +160,10 @@ map <leader>r :RopeRename<CR>
 " Binding for fuzzy text search via ack (similar to grep)
 nmap <leader>a <Esc>:Ack!
 
+" List classes and methods in the opened files
+map <F8> :TlistToggle<cr>
+let Tlist_GainFocus_On_ToggleOpen=0
+let Tlist_Exit_OnlyWindow=1
 
 """"""""""""""""""""""""
 " INTEGRATION WITH GIT "
