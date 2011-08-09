@@ -330,3 +330,10 @@ EOF
 
 " Get code completion for django modules by importing DJANGO_SETTINGS_MODULE
 " add : export DJANGO_SETTINGS_MODULE=project.settings   to .zshrc
+
+"""""""""
+" Latex "
+"""""""""
+
+" Latex related config has been moved to another file
+source latex/vimrc.vim
