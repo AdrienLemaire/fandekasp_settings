@@ -336,4 +336,4 @@ EOF
 """""""""
 
 " Latex related config has been moved to another file
-source latex/vimrc.vim
+source ~/.vim/latex/vimrc.vim
