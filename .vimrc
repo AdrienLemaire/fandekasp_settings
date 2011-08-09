@@ -33,6 +33,14 @@ if v:version >= 703
     "set cursorcolumn
     "set cursorline
 endif
+if &t_Co> 2 || has("gui_running")
+" When terminal has colors, active syntax coloration
+    syntax on
+    set hlsearch " Highlight results
+" TIP: Type 'nohl' to remove highlight
+    set incsearch " Highlight of the first matching string
+    set smartcase " Highlight first matching string using history
+endif
 
 " Show hidden characters like tab or endl
 set list
@@ -68,7 +76,7 @@ set wildmode=list:longest,full
 
 " load pathogen
 source ~/.vim/bundle/pathogen/autoload/pathogen.vim
-"filetype off
+filetype off
 "call pathogen#runtime_append_all_bundles()
  call pathogen#infect()
 call pathogen#helptags()
@@ -111,6 +119,7 @@ map <leader>g :GundoToggle<CR>
 
 syntax on                           " syntax highlighing
 filetype on                          " try to detect filetypes
+filetype plugin on
 filetype plugin indent on    " enable loading indent file for filetype
 
 " Don't let pyflakes use the quickfix window
@@ -228,6 +237,10 @@ map <F1> <ESC>:exec "help ".expand("<cWORD>")<CR>
 
 " Ignore some files with tab autocompletion
 set suffixes=*~,*.pyc,*.pyo
+
+" Google translator
+let g:langpair="fr|en"
+let g:vtranslate="T"
 
 
 """""""""""""""""""

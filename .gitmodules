@@ -58,3 +58,9 @@
 [submodule "bundle/pydiction"]
 	path = bundle/pydiction
 	url = https://github.com/vim-scripts/Pydiction.git
+[submodule "bundle/pathogen"]
+	path = bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "bundle/google-translator"]
+	path = bundle/google-translator
+	url = https://github.com/vim-scripts/Google-translator.git
