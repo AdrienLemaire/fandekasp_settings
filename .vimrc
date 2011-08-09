@@ -1,11 +1,3 @@
-" load pathogen
-source ~/.vim/bundle/pathogen/autoload/pathogen.vim
-filetype off
-call pathogen#runtime_append_all_bundles()
-" call pathogen#infect()
-call pathogen#helptags()
-
-
 """"""""""""""""""""
 " General settings "
 """"""""""""""""""""
@@ -72,6 +64,14 @@ noremap! <Right> <Esc>
 
 set wildmenu " Enable menu at the bottom of the vim window
 set wildmode=list:longest,full
+
+
+" load pathogen
+source ~/.vim/bundle/pathogen/autoload/pathogen.vim
+"filetype off
+"call pathogen#runtime_append_all_bundles()
+ call pathogen#infect()
+call pathogen#helptags()
 
 
 
