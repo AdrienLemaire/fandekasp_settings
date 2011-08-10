@@ -1,0 +1,9 @@
+Dependancies
+============
+
+ropevim
+    rope
+    ropemode
+
+pytest.vim
+    py.test  # dev-python/pytest on gentoo

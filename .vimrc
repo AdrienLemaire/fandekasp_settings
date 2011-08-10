@@ -19,7 +19,7 @@ set expandtab           " Convert tabs into spaces
 set tw=80               " 80 characters max per line
 set nu                  " Display the number of each line
 set showcmd             " Display incomplete commands
-set ttyfast             " Fast terminal connection 
+set ttyfast             " Fast terminal connection
 set title               " Name of the file in the window tab's title
 set noerrorbells        " Shut the bell
 "set spell               " Enable spellchecking
@@ -182,12 +182,12 @@ function! CleanText()
     " Put 2 empty lines before a class (take the decorators into account)
     silent :%s/\(@\w*\)\@<!\n*\(\(\n@\w*\)*\n\(class\|def\) \)\@=/\r\r/ge
     " Put spaces between == if there aren't
-    silent :%s/\(\S\)\@===\(\S\)\@=/ == /ge
+    silent :%s/\(\S\)\@ == =\(\S\)\@=/ == /ge
     " Put a space after a coma if missing
     "silent :%s/,\(\S\)\@=/, /ge
-    " Remove unwanted spaces after ( or before )
-    silent :%s/( /(/ge
-    silent :%s/ )/)/ge  " you can do better ...
+    " Remove unwanted spaces after (or before)
+    silent :%s/(/(/ge
+    silent :%s/)/)/ge  " you can do better ...
     set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
@@ -260,6 +260,10 @@ map <leader>n :NERDTreeToggle<CR>
 " Ropevim settings
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
+let ropevim_vim_completion=1
+let ropevim_extended_complete=1
+" add the name of modules you want to autoimport
+let g:ropevim_autoimport_modules = ["os", "shutil"]
 
 " Binding for fuzzy text search via ack (similar to grep)
 nmap <leader>a <Esc>:Ack!
@@ -268,6 +272,13 @@ nmap <leader>a <Esc>:Ack!
 map <F8> :TlistToggle<cr>
 let Tlist_GainFocus_On_ToggleOpen=0
 let Tlist_Exit_OnlyWindow=1
+
+" use MiniBufExplorer inside TagList
+let g:miniBufExplModSelTarget = 1
+
+" Mapping of Control + hjkl to window movement commands
+let g:miniBufExplMapWindowNavVim = 1
+
 
 """"""""""""""""""""""""
 " INTEGRATION WITH GIT "
