@@ -242,6 +242,10 @@ set suffixes=*~,*.pyc,*.pyo
 let g:langpair="fr|en"
 let g:vtranslate="T"
 
+" Display python code calltips for autocomplete
+set iskeyword+=.
+let g:loaded_python_calltips = 0
+
 
 """""""""""""""""""
 " CODE NAVIGATION "
