@@ -254,10 +254,10 @@ let g:loaded_python_calltips = 0
 " With minibufexpl plugin, type :buffers to get the list of buffers
 " Switch buffer: b<number> or :b filenam<tab> with file name autocompletion
 " close a buffer:  :bd or :bw
-
 " command-t settings. by default bound to <leader>t, needs a "rake make" !
 "  supports searching only through opened buffers, instead of files
 " using <leader>b.
+" ALERT: minibufexpl and command-t have been removed from submodules
 
 map <leader>n :NERDTreeToggle<CR>
 

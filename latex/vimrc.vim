@@ -10,7 +10,7 @@
 "                Want To Public License, Version 2, as published by Sam Hocevar.
 "                See http://sam.zoy.org/wtfpl/COPYING for more details.
 "==============================================================================
-"if &filetype == 'tex'
+if &filetype == 'tex'
     " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
     filetype plugin on
 
@@ -33,7 +33,7 @@
 
     " this is mostly a matter of taste. but LaTeX looks good with just a bit
     " of indentation.
-    "set sw=2
+    set sw=2
     " TIP: if you write your \label's as \label{fig:something}, then if you
     " type in \ref{fig: and press <C-n> you will automatically cycle through
     " all the figure labels. Very useful!
@@ -41,10 +41,11 @@
     "let g:Tex_MultipleCompileFormats = 'pdf'
     "let g:Tex_CompileRule_pdf = 'pdflatex --interaction=nonstopmode $*'
     let g:Tex_CompileRule_html = 'latex2html -split 0 -info 0 -no_navigation $*'
-    "let g:Tex_DefaultTargetFormat = "pdf"
+    let g:Tex_DefaultTargetFormat = "pdf"
     let g:Tex_DefaultTargetFormat = "html"
     "let g:Tex_ViewRuleComplete_pdf = 'mupdf $*.pdf'
     let g:Tex_ViewRuleComplete_html = 'xdg-open $*/index.html &'
+    let g:Tex_ViewRule_pdf = 'pdfopen'
     if has("unix") && match(system("uname"),'Darwin') != -1
         " It's a Mac!
         let g:Tex_ViewRule_pdf = 'open -a Preview.app'
@@ -53,4 +54,4 @@
 
     " prefill a dream.tex files with a template <= used by LucidDreamingBox program
     autocmd BufNewFile *dream.tex   0r ~/.vim/templates/dream.tex
-"endif
+endif

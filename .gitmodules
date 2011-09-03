@@ -18,14 +18,6 @@
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab.git
     ignore = dirty
-[submodule "bundle/minibufexpl"]
-	path = bundle/minibufexpl
-	url = https://github.com/sontek/minibufexpl.vim.git
-    ignore = dirty
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = https://github.com/wincent/Command-T.git
-    ignore = dirty
 [submodule "bundle/pyflakes-pathogen"]
 	path = bundle/pyflakes-pathogen
 	url = https://github.com/mitechie/pyflakes-pathogen.git
