@@ -224,9 +224,9 @@ map <F6> :call CleanText()<CR>
 " make SuperTab context sensitive and enable omni code completion
 au FileType python set omnifunc=pythoncomplete#Complete
 "autocmd BufNewFile,BufRead *.py compiler nose
-let g:pydiction_location = "~/.vim/bundle/pydiction/complete-dict"
-let g:pydiction_menu_height = 20
-let g:SuperTabDefaultCompletionType = "context"
+"let g:pydiction_location = "~/.vim/bundle/pydiction/complete-dict"
+"let g:pydiction_menu_height = 20
+"let g:SuperTabDefaultCompletionType = "context"
 
 " Enable the menu and pydoc preview to get the most useful info out of the
 " code completion. <leader>pwd open a new window with the whole doc page.
