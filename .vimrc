@@ -10,7 +10,7 @@ set bs=2                " Authorize all deletion
 set ai                  " Always auto-indent
 set viminfo='20,\"50    " Read/write a .viminfo file, 50 lines max
 set history=200         " Save the last 200 commands in history
-set undolevels=100      " Save the last 200 undos in history
+set undolevels=100      " Save the last 100 undos in history
 set ruler               " Always show the cursor
 set shiftwidth=4        " Number of characters per indentation
 set tabstop=4           " Number of spaces per tabulation
@@ -224,9 +224,9 @@ map <F6> :call CleanText()<CR>
 " make SuperTab context sensitive and enable omni code completion
 au FileType python set omnifunc=pythoncomplete#Complete
 "autocmd BufNewFile,BufRead *.py compiler nose
-let g:pydiction_location = "~/.vim/bundle/pydiction/complete-dict"
-let g:pydiction_menu_height = 20
-let g:SuperTabDefaultCompletionType = "context"
+"let g:pydiction_location = "~/.vim/bundle/pydiction/complete-dict"
+"let g:pydiction_menu_height = 20
+"let g:SuperTabDefaultCompletionType = "context"
 
 " Enable the menu and pydoc preview to get the most useful info out of the
 " code completion. <leader>pwd open a new window with the whole doc page.
@@ -342,9 +342,4 @@ EOF
 " Get code completion for django modules by importing DJANGO_SETTINGS_MODULE
 " add : export DJANGO_SETTINGS_MODULE=project.settings   to .zshrc
 
-"""""""""
-" Latex "
-"""""""""
-
-" Latex related config has been moved to another file
-source ~/.vim/latex/vimrc.vim
+"hi Normal ctermbg=NONE

@@ -11,17 +11,14 @@
 "                See http://sam.zoy.org/wtfpl/COPYING for more details.
 "==============================================================================
 if &filetype == 'tex'
-    " REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-    filetype plugin on
-
     " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
     " can be called correctly.
-    set shellslash
+    setlocal shellslash
 
     " IMPORTANT: grep will sometimes skip displaying the file name if you
     " search in a singe file. This will confuse Latex-Suite. Set your grep
     " program to always generate a file-name.
-    set grepprg=grep\ -nH\ $*
+    setlocal grepprg=grep\ -nH\ $*
 
     " OPTIONAL: This enables automatic indentation as you type.
     filetype indent on
@@ -33,19 +30,26 @@ if &filetype == 'tex'
 
     " this is mostly a matter of taste. but LaTeX looks good with just a bit
     " of indentation.
-    set sw=2
+    setlocal sw=2
+    setlocal tabstop=2
+    setlocal softtabstop=2
+
     " TIP: if you write your \label's as \label{fig:something}, then if you
     " type in \ref{fig: and press <C-n> you will automatically cycle through
     " all the figure labels. Very useful!
-    set iskeyword+=:
-    "let g:Tex_MultipleCompileFormats = 'pdf'
+    setlocal iskeyword+=:
+
+    let g:Tex_MultipleCompileFormats = 'pdf'
+    "let g:Tex_FormatDependency_pdf = 'dvi,ps,pdf'
+    "let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
+    "let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+    "let g:Tex_CompileRule_pdf = 'ps2pdf $*.ps'
     "let g:Tex_CompileRule_pdf = 'pdflatex --interaction=nonstopmode $*'
     let g:Tex_CompileRule_html = 'latex2html -split 0 -info 0 -no_navigation $*'
     let g:Tex_DefaultTargetFormat = "pdf"
-    let g:Tex_DefaultTargetFormat = "html"
-    "let g:Tex_ViewRuleComplete_pdf = 'mupdf $*.pdf'
+    let g:Tex_ViewRuleComplete_pdf = 'mupdf $*.pdf'
     let g:Tex_ViewRuleComplete_html = 'xdg-open $*/index.html &'
-    let g:Tex_ViewRule_pdf = 'pdfopen'
+    let g:Tex_ViewRule_pdf = 'mupdf'
     if has("unix") && match(system("uname"),'Darwin') != -1
         " It's a Mac!
         let g:Tex_ViewRule_pdf = 'open -a Preview.app'
