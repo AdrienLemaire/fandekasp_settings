@@ -27,6 +27,7 @@ set noerrorbells        " Shut the bell
 "set spellsuggest=10     " 10 alternative spelling maximum
 set isfname+=32         " gf support filenames with spaces
 set t_Co=256            " get 256 colors in term
+set lazyredraw          " Clear and redraw screen when executing a script
 colorscheme asu1dark     " set colorscheme
 if v:version >= 703
     set colorcolumn=80      " Coloration of the 80th column
@@ -140,7 +141,6 @@ hi Search  term=reverse ctermbg=Red ctermfg=White guibg=Red guifg=White
 
 " ------- Cleaning stuff ---------
 function! <SID>Flake8()
-  set lazyredraw
   " Close any existing cwindows.
   cclose
   let l:grepformat_save = &grepformat
@@ -162,7 +162,6 @@ function! <SID>Flake8()
   " Open cwindow
   execute 'belowright copen '.l:mod_total
   nnoremap <buffer> <silent> c :cclose<CR>
-  set nolazyredraw
   redraw!
 endfunction
 
@@ -188,7 +187,6 @@ function! CleanText()
     " Remove unwanted spaces after (or before)
     silent :%s/(/(/ge
     silent :%s/)/)/ge  " you can do better ...
-    set nolazyredraw
     call cursor(curline, curcol)
     if &filetype == 'python'
         " if the current file is in python, we launch flake8
@@ -343,3 +341,5 @@ EOF
 " add : export DJANGO_SETTINGS_MODULE=project.settings   to .zshrc
 
 "hi Normal ctermbg=NONE
+"
+
