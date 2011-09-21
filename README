@@ -7,3 +7,6 @@ ropevim
 
 pytest.vim
     py.test  # dev-python/pytest on gentoo
+
+
+alert:: python_calltips is broken with pathogen and pyflakes

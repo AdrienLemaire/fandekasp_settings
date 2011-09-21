@@ -56,8 +56,6 @@ set directory=.,./.backup,/tmp
 
 let mapleader = ","
 
-let g:snips_author = "Adrien Lemaire"
-
 " .vimrc autoreload
 autocmd BufWritePost .vimrc source %
 
@@ -219,6 +217,11 @@ map <F6> :call CleanText()<CR>
 " TAB COMPLETION AND DOCUMENTATION "
 """"""""""""""""""""""""""""""""""""
 
+let g:snips_author = "Adrien Lemaire"
+" custom snipMate func for acp to display snippets if start writing in
+" uppercase
+let g:acp_behaviorSnipmateLength = 1
+
 " make SuperTab context sensitive and enable omni code completion
 au FileType python set omnifunc=pythoncomplete#Complete
 "autocmd BufNewFile,BufRead *.py compiler nose
@@ -239,6 +242,10 @@ set suffixes=*~,*.pyc,*.pyo
 " Google translator
 let g:langpair="fr|en"
 let g:vtranslate="T"
+
+" Display python code calltips for autocomplete
+set iskeyword+=.
+let g:loaded_python_calltips = 0
 
 
 """""""""""""""""""
@@ -272,10 +279,10 @@ let Tlist_GainFocus_On_ToggleOpen=0
 let Tlist_Exit_OnlyWindow=1
 
 " use MiniBufExplorer inside TagList
-let g:miniBufExplModSelTarget = 1
+"let g:miniBufExplModSelTarget = 1
 
 " Mapping of Control + hjkl to window movement commands
-let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavVim = 1
 
 
 """"""""""""""""""""""""
